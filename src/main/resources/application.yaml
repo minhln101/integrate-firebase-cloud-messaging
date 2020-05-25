@@ -1,0 +1,9 @@
+server:
+  port: 8088
+
+firebase:
+  url: https://fcm.googleapis.com/v1/projects/${firebase.project-name}/messages:send
+  project-name: e3d-dms
+  database-name:
+  credential: classpath:/firebase/service-account.json
+  auth-scope: https://www.googleapis.com/auth/firebase.messaging

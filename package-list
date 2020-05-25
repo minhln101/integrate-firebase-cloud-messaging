@@ -1,0 +1,8 @@
+vn.nerdcode.notification_service
+vn.nerdcode.notification_service.config
+vn.nerdcode.notification_service.controller
+vn.nerdcode.notification_service.dto.request
+vn.nerdcode.notification_service.dto.response
+vn.nerdcode.notification_service.service
+vn.nerdcode.notification_service.service.impl
+vn.nerdcode.notification_service.util
