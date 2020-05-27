@@ -13,4 +13,5 @@ public class Constant {
 
   public static final String FCM_TARGET_TOKEN = "token";
 
+  public static final String FCM_TARGET_CONDITION = "condition";
 }

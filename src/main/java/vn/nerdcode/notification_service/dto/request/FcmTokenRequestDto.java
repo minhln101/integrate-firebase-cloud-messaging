@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
- * Created by Minh Lee on 22/05/2020.
+ * Created by Minh Lee on 25/05/2020.
  *
  * This class defines all required properties to build a message payload so that we can use it as a
  * request body to send via FCM provided API.
@@ -19,13 +19,11 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class FcmSingleRequestDto extends FcmRequestDto {
+public class FcmTokenRequestDto extends FcmRequestDto {
 
   /**
-   * This property denotes a specific topic that created on the FCM console.
-   *
-   * The prefix "/topics/" is optional.
+   * This property denotes a specific device token that registered with FCM.
    */
-  @NotBlank(message = "err.fcm-request.topic-is-required")
-  private String topic;
+  @NotBlank(message = "err.fcm-request.token-is-required")
+  private String token;
 }

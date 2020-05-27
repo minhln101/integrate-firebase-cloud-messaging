@@ -14,6 +14,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import vn.nerdcode.notification_service.dto.request.FcmBasicNotificationTemplate;
+import vn.nerdcode.notification_service.dto.request.FcmConditionRequestDto;
+import vn.nerdcode.notification_service.dto.request.FcmTokenRequestDto;
 import vn.nerdcode.notification_service.dto.request.FcmTopicRequestDto;
 import vn.nerdcode.notification_service.dto.response.FcmTopicResponse;
 import vn.nerdcode.notification_service.service.FcmNotificationService;
@@ -41,8 +43,25 @@ public class FcmNotificationServiceImpl implements FcmNotificationService {
 
   @Override
   public FcmTopicResponse pushToTopic(FcmTopicRequestDto data) {
-    JSONObject msgPayload = buildMsgPayload(Constant.FCM_TARGET_TOPIC, data.getTopic(),
+    return pushSingleNotification(Constant.FCM_TARGET_TOPIC, data.getTopic(),
         data.getNotificationPayload());
+  }
+
+  @Override
+  public FcmTopicResponse pushToToken(FcmTokenRequestDto data) {
+    return pushSingleNotification(Constant.FCM_TARGET_TOKEN, data.getToken(),
+        data.getNotificationPayload());
+  }
+
+  @Override
+  public FcmTopicResponse pushWithCondition(FcmConditionRequestDto data) {
+    return pushSingleNotification(Constant.FCM_TARGET_CONDITION, data.getCondition(),
+        data.getNotificationPayload());
+  }
+
+  private FcmTopicResponse pushSingleNotification(String target, String targetValue,
+      FcmBasicNotificationTemplate notificationPayload) {
+    JSONObject msgPayload = buildMsgPayload(target, targetValue, notificationPayload);
     HttpEntity<String> httpEntity = null;
     try {
       httpEntity = new HttpEntity<>(msgPayload.toString(), buildRequestHeaders());
@@ -56,7 +75,7 @@ public class FcmNotificationServiceImpl implements FcmNotificationService {
 
     ResponseEntity<FcmTopicResponse> response = restTemplate
         .postForEntity(firebaseUrl, httpEntity, FcmTopicResponse.class);
-    log.info("Push notification to topic {}, got response {}", data.getTopic(), response);
+    log.info("Push notification to {}: {}, got response {}", target, targetValue, response);
 
     return response.getBody();
   }

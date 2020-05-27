@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import vn.nerdcode.notification_service.dto.request.FcmTokenRequestDto;
 import vn.nerdcode.notification_service.dto.request.FcmTopicRequestDto;
 import vn.nerdcode.notification_service.dto.response.FcmTopicResponse;
 import vn.nerdcode.notification_service.service.FcmNotificationService;
@@ -22,8 +23,13 @@ public class FcmNotificationController {
   @Autowired
   private FcmNotificationService fcmNotificationService;
 
-  @PostMapping
+  @PostMapping("single-topic")
   public ResponseEntity<FcmTopicResponse> pushToTopic(@Valid @RequestBody FcmTopicRequestDto data) {
     return ResponseEntity.ok(fcmNotificationService.pushToTopic(data));
+  }
+
+  @PostMapping("single-device")
+  public ResponseEntity<FcmTopicResponse> pushToToken(@Valid @RequestBody FcmTokenRequestDto data) {
+    return ResponseEntity.ok(fcmNotificationService.pushToToken(data));
   }
 }

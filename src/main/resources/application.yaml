@@ -2,8 +2,7 @@ server:
   port: 8088
 
 firebase:
-  url: https://fcm.googleapis.com/v1/projects/${firebase.project-name}/messages:send
-  project-name: e3d-dms
-  database-name:
-  credential: classpath:/firebase/service-account.json
-  auth-scope: https://www.googleapis.com/auth/firebase.messaging
+  url: https://fcm.googleapis.com/v1/projects/${firebase.project-name}/messages:send # provided by FCM
+  project-name: nerdcode                                                             # your own project created on Firebase Console
+  credential: classpath:/firebase/service-account.json                               # where you place the file service-account.json, which is generated from Firebase Console setting
+  auth-scope: https://www.googleapis.com/auth/firebase.messaging                     # provided by Firebase
