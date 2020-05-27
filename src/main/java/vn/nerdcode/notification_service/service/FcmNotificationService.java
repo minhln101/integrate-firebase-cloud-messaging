@@ -3,7 +3,7 @@ package vn.nerdcode.notification_service.service;
 import vn.nerdcode.notification_service.dto.request.FcmConditionRequestDto;
 import vn.nerdcode.notification_service.dto.request.FcmTokenRequestDto;
 import vn.nerdcode.notification_service.dto.request.FcmTopicRequestDto;
-import vn.nerdcode.notification_service.dto.response.FcmTopicResponse;
+import vn.nerdcode.notification_service.dto.response.FcmSingleResponse;
 
 /**
  * Created by Minh Lee on 22/05/2020.
@@ -16,7 +16,7 @@ public interface FcmNotificationService {
    * @param data provide a topic and notification payload
    * @return name with Firebase message ID
    */
-  FcmTopicResponse pushToTopic(FcmTopicRequestDto data);
+  FcmSingleResponse pushToTopic(FcmTopicRequestDto data);
 
   /**
    * Push notification to a specific device.
@@ -24,7 +24,7 @@ public interface FcmNotificationService {
    * @param data provide a device token and notification payload
    * @return name with Firebase message ID
    */
-  FcmTopicResponse pushToToken(FcmTokenRequestDto data);
+  FcmSingleResponse pushToToken(FcmTokenRequestDto data);
 
   /**
    * Push notification with a condition, which is a boolean expression that specifies the target
@@ -33,6 +33,6 @@ public interface FcmNotificationService {
    * @param data provide a device token and notification payload
    * @return name with Firebase message ID
    */
-  FcmTopicResponse pushWithCondition(FcmConditionRequestDto data);
+  FcmSingleResponse pushWithCondition(FcmConditionRequestDto data);
 
 }

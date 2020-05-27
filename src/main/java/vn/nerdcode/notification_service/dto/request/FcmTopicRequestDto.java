@@ -19,7 +19,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class FcmSingleRequestDto extends FcmRequestDto {
+public class FcmTopicRequestDto extends FcmRequestDto {
 
   /**
    * This property denotes a specific topic that created on the FCM console.

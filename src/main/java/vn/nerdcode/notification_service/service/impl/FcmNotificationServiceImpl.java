@@ -17,7 +17,7 @@ import vn.nerdcode.notification_service.dto.request.FcmBasicNotificationTemplate
 import vn.nerdcode.notification_service.dto.request.FcmConditionRequestDto;
 import vn.nerdcode.notification_service.dto.request.FcmTokenRequestDto;
 import vn.nerdcode.notification_service.dto.request.FcmTopicRequestDto;
-import vn.nerdcode.notification_service.dto.response.FcmTopicResponse;
+import vn.nerdcode.notification_service.dto.response.FcmSingleResponse;
 import vn.nerdcode.notification_service.service.FcmNotificationService;
 import vn.nerdcode.notification_service.util.Constant;
 
@@ -42,24 +42,24 @@ public class FcmNotificationServiceImpl implements FcmNotificationService {
   private RestTemplate restTemplate;
 
   @Override
-  public FcmTopicResponse pushToTopic(FcmTopicRequestDto data) {
+  public FcmSingleResponse pushToTopic(FcmTopicRequestDto data) {
     return pushSingleNotification(Constant.FCM_TARGET_TOPIC, data.getTopic(),
         data.getNotificationPayload());
   }
 
   @Override
-  public FcmTopicResponse pushToToken(FcmTokenRequestDto data) {
+  public FcmSingleResponse pushToToken(FcmTokenRequestDto data) {
     return pushSingleNotification(Constant.FCM_TARGET_TOKEN, data.getToken(),
         data.getNotificationPayload());
   }
 
   @Override
-  public FcmTopicResponse pushWithCondition(FcmConditionRequestDto data) {
+  public FcmSingleResponse pushWithCondition(FcmConditionRequestDto data) {
     return pushSingleNotification(Constant.FCM_TARGET_CONDITION, data.getCondition(),
         data.getNotificationPayload());
   }
 
-  private FcmTopicResponse pushSingleNotification(String target, String targetValue,
+  private FcmSingleResponse pushSingleNotification(String target, String targetValue,
       FcmBasicNotificationTemplate notificationPayload) {
     JSONObject msgPayload = buildMsgPayload(target, targetValue, notificationPayload);
     HttpEntity<String> httpEntity = null;
@@ -73,8 +73,8 @@ public class FcmNotificationServiceImpl implements FcmNotificationService {
 
     log.info("Preparing to push notification from payload {}", msgPayload);
 
-    ResponseEntity<FcmTopicResponse> response = restTemplate
-        .postForEntity(firebaseUrl, httpEntity, FcmTopicResponse.class);
+    ResponseEntity<FcmSingleResponse> response = restTemplate
+        .postForEntity(firebaseUrl, httpEntity, FcmSingleResponse.class);
     log.info("Push notification to {}: {}, got response {}", target, targetValue, response);
 
     return response.getBody();

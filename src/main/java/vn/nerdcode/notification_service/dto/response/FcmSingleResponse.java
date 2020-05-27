@@ -22,7 +22,7 @@ import vn.nerdcode.notification_service.dto.request.FcmBasicNotificationTemplate
 @AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 @ToString
-public class FcmTopicResponse implements Serializable {
+public class FcmSingleResponse implements Serializable {
 
   private String name;
   private Map<String, String> data;
